@@ -1,35 +1,36 @@
-# Run this app with `python app.py` and
-# visit http://127.0.0.1:8050/ in your web browser.
-
-
-from dash import Dash, html, dcc
-import plotly.express as px
+import streamlit as st
 import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
 
-app = Dash()
+# Streamlit config
+st.set_page_config(page_title="Smart City Dashboard", layout="wide")
 
-# assume you have a "long-form" data frame
-# see https://plotly.com/python/px-arguments/ for more options
-df = pd.DataFrame({
-    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-    "Amount": [4, 1, 2, 2, 4, 5],
-    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
+st.title("🌆 Smart City Real-Time Monitoring Dashboard")
+
+# --------- Dummy Live Data ---------
+st.subheader("📊 Live Traffic & AQI Metrics")
+
+# Creating dummy live data
+live_data = pd.DataFrame({
+    "Location": ["Downtown", "Uptown", "Suburbs", "Industrial Zone"],
+    "Traffic Flow (vehicles/hr)": [320, 210, 180, 400],
+    "Air Quality Index (AQI)": [85, 60, 55, 110],
+    "Last Updated": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")] * 4
 })
 
-fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
+st.write(live_data)
 
-app.layout = html.Div(children=[
-    html.H1(children='Hello Dash'),
+# --------- Dummy Historical Data ---------
+st.subheader("📈 Historical Trends")
 
-    html.Div(children='''
-        Dash: A web application framework for your data.
-    '''),
+# Creating dummy historical data
+date_range = [datetime.now() - timedelta(days=i) for i in range(30)][::-1]
+historical = pd.DataFrame({
+    "Date": date_range,
+    "Downtown AQI": np.random.randint(70, 120, size=30),
+    "Uptown AQI": np.random.randint(50, 90, size=30),
+    "Traffic Volume": np.random.randint(200, 500, size=30)
+}).set_index("Date")
 
-    dcc.Graph(
-        id='example-graph',
-        figure=fig
-    )
-])
-
-if __name__ == '__main__':
-    app.run(debug=True)
+st.line_chart(historical)

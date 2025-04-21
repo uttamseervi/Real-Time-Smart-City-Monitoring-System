@@ -1,10 +1,10 @@
-# Smart City Real-Time Monitoring System
+# Real-Time Smart City Monitoring System
 
 ## 🚀 Project Overview
 
 This project is a Big Data Analytics solution designed to enable **real-time monitoring of smart cities** using streaming data from multiple sources. It focuses on integrating **traffic**, **air quality (AQI)**, and **weather** data to provide insights, alerts, and predictions that can help mitigate congestion and pollution issues in urban environments.
 
-The system collects and processes live data using **Kafka**, **Spark Streaming**, and stores enriched outputs in **MongoDB**, which is then visualized on an interactive dashboard built with **Dash**.
+The system collects and processes live data using **Kafka**, **Spark Streaming**, and stores enriched outputs in **MongoDB**, which is then visualized on an interactive dashboard built with **Streamlit**.
 
 ---
 
@@ -65,7 +65,7 @@ The system collects and processes live data using **Kafka**, **Spark Streaming**
 - Stores enriched, time-series data for dashboard queries.
 - Optional: stores historical data for ML model training.
 
-### 4. **Dash (Plotly)**
+### 4. **Streamlit**
 - Interactive dashboard to visualize:
   - Real-time traffic and AQI levels.
   - Map with congestion and pollution zones.
