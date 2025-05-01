@@ -29,7 +29,7 @@ from kafka import KafkaProducer
 import time
 
 # Kafka Config
-KAFKA_BROKER = 'localhost:9092'  # Update this with your Kafka broker's address
+KAFKA_BROKER = '192.168.5.218:9092'
 TOPIC_NAME = 'aqi_data'
 
 # OpenAQ API Config

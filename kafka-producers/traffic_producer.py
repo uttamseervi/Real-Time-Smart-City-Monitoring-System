@@ -5,7 +5,7 @@ import json
 import time
 
 # Kafka Config
-KAFKA_BROKER = 'localhost:9092'
+KAFKA_BROKER = '192.168.5.218:9092'
 TOPIC_NAME = 'traffic'
 
 # TomTom API Config

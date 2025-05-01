@@ -1,40 +1,43 @@
-# from pyspark.sql import SparkSession
-# from pyspark.sql.functions import col
-# from pyspark.sql.types import StructType, StructField, String, Integer
-# from kafka import KafkaConsumer
-# import json
 
-# # Initialize Spark session
-# spark = SparkSession.builder.appName("SmartCityMonitor").getOrCreate()
+'''
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
+from pyspark.sql.types import StructType, StructField, String, Integer
+from kafka import KafkaConsumer
+import json
 
-# # Define schema for traffic, AQI, weather data
-# traffic_schema = StructType([
-#     StructField("junction", String(), True),
-#     StructField("timestamp", String(), True),
-#     StructField("vehicles_per_minute", Integer(), True),
-#     StructField("avg_speed_kmph", Integer(), True)
-# ])
+# Initialize Spark session
+spark = SparkSession.builder.appName("SmartCityMonitor").getOrCreate()
 
-# # Consume traffic data
-# traffic_df = spark.readStream.format("kafka").option("kafka.bootstrap.servers", "localhost:9093").option("subscribe", "traffic-data").load()
+# Define schema for traffic, AQI, weather data
+traffic_schema = StructType([
+    StructField("junction", String(), True),
+    StructField("timestamp", String(), True),
+    StructField("vehicles_per_minute", Integer(), True),
+    StructField("avg_speed_kmph", Integer(), True)
+])
 
-# # Process traffic data
-# traffic_df = traffic_df.selectExpr("CAST(value AS STRING)").select(from_json("value", traffic_schema).alias("data"))
-# traffic_df = traffic_df.select("data.*")
+# Consume traffic data
+traffic_df = spark.readStream.format("kafka").option("kafka.bootstrap.servers", "localhost:9093").option("subscribe", "traffic-data").load()
 
-# # Example enrichment
-# enriched_df = traffic_df.withColumn("congestion_level", (col("vehicles_per_minute") > 150).cast("string"))
+# Process traffic data
+traffic_df = traffic_df.selectExpr("CAST(value AS STRING)").select(from_json("value", traffic_schema).alias("data"))
+traffic_df = traffic_df.select("data.*")
 
-# # Write to MongoDB (or another system)
-# enriched_df.writeStream.format("mongo").option("uri", "mongodb://localhost/smartcity.traffic_data").outputMode("append").start().awaitTermination()
+# Example enrichment
+enriched_df = traffic_df.withColumn("congestion_level", (col("vehicles_per_minute") > 150).cast("string"))
 
+# Write to MongoDB (or another system)
+enriched_df.writeStream.format("mongo").option("uri", "mongodb://localhost/smartcity.traffic_data").outputMode("append").start().awaitTermination()
+
+'''
 
 # =========================
 # 1. WEATHER CONSUMER
 # =========================
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import from_json, col
-from pyspark.sql.types import StructType, StringType, FloatType, LongType
+from pyspark.sql.types import StructType, StringType, FloatType, LongType,IntegerType
 
 # WEATHER Schema
 weather_schema = StructType() \
@@ -75,6 +78,7 @@ weather_query = weather_json.writeStream \
 # =========================
 # 2. AQI CONSUMER
 # =========================
+'''
 from pyspark.sql.types import IntegerType
 
 # AQI Schema
@@ -113,6 +117,7 @@ aqi_query = aqi_json.writeStream \
     .outputMode("append") \
     .start()
 
+'''
 
 # =========================
 # 3. TRAFFIC CONSUMER
@@ -152,5 +157,5 @@ traffic_query = traffic_json.writeStream \
 
 # Await Termination for all
 weather_query.awaitTermination()
-aqi_query.awaitTermination()
+# aqi_query.awaitTermination()
 traffic_query.awaitTermination()
