@@ -42,6 +42,7 @@ def fetch_aqi_data():
     headers = {"X-API-Key": API_KEY}
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
+        print("Data fetched successfully", response.json())
         return response.json()['results']
     else:
         print(f"Error fetching data: {response.status_code}")
