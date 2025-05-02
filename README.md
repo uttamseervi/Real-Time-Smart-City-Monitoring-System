@@ -166,19 +166,21 @@ streamlit run app.py
 
 ### Run Zookeeper:
 ```bash
-docker run -d -p 2181:2181 --name zookeeper zookeeper
+docker run -p 2181:2181 --name zookeeper zookeeper
 ```
 
 ### Run Kafka Broker:
 ```bash
-PRIVATE_IP="192.168.x.x"  # Replace with your actual IP
+$PRIVATE_IP = "192.168.5.218"
 
-docker run -d -p 9092:9092 `
-  -e KAFKA_ZOOKEEPER_CONNECT=$PRIVATE_IP:2181 `
-  -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$PRIVATE_IP:9092 `
+docker run -p 9092:9092 `
+  -e KAFKA_ZOOKEEPER_CONNECT="$($PRIVATE_IP):2181" `
+  -e KAFKA_ADVERTISED_LISTENERS="PLAINTEXT://$($PRIVATE_IP):9092" `
   -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 `
   --name kafka `
   confluentinc/cp-kafka
+
+
 ```
 
 ---

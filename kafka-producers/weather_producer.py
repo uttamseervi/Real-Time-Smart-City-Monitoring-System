@@ -9,8 +9,8 @@ TOPIC_NAME = 'weather'
 
 # OpenWeatherMap API Config
 API_KEY = '71b7ad91a96968872851dec68a282946'
-LAT =  12.9527125 
-LON =  76.5770888 
+LAT = 12.97160 
+LON = 77.59456
 URL = f"https://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LON}&appid={API_KEY}"
 
 # Kafka Producer Setup

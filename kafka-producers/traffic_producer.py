@@ -14,8 +14,8 @@ API-KEY
 https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/xml?key=jAPkpwt8b2gxLgAGQkyvGN7Bchz88x0v&point=52.41072,4.84239'''
 
 API_KEY = 'jAPkpwt8b2gxLgAGQkyvGN7Bchz88x0v'
-LAT = 52.41072
-LON = 4.84239
+LAT = 12.97160 
+LON = 77.59456
 URL = f"https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/xml?key={API_KEY}&point={LAT},{LON}"
 
 # Set up Kafka Producer
