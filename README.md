@@ -171,7 +171,7 @@ docker run -p 2181:2181 --name zookeeper zookeeper
 
 ### Run Kafka Broker:
 ```bash
-$PRIVATE_IP = "192.168.5.218"
+$PRIVATE_IP = "192.168.1.5"
 
 docker run -p 9092:9092 `
   -e KAFKA_ZOOKEEPER_CONNECT="$($PRIVATE_IP):2181" `

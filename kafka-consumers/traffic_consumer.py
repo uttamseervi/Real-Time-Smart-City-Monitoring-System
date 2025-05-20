@@ -7,7 +7,7 @@ from datetime import datetime
 
 # === CONFIG ===
 MONGO_URI = "mongodb+srv://uttamseervi:uttamseervi0045*@smartcitycluster.atuzu9o.mongodb.net/?retryWrites=true&w=majority&appName=SmartCityCluster"
-KAFKA_BROKER = '192.168.5.218:9092'
+KAFKA_BROKER = '192.168.1.5:9092'
 TOPIC = 'traffic'
 
 # === DB SETUP ===
